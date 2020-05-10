@@ -2,7 +2,7 @@
     
     var cacheKey = 'KnownCities'
     var cities = JSON.parse(localStorage.getItem(cacheKey));
-    
+    var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
      
      
      if (! cities) {
@@ -64,8 +64,14 @@
      function displayWeather(cityData){
 
        // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-       $(".city").html('testing');
 
+       var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+
+       $(".cityName").append(cityData.name); 
+       $(".date").append(currentDate);
+       $(".temp").append(cityData.main.temp);
+       $(".humidity").append(cityData.main.humidity);
+  
        console.log(cityData)
     
      }
@@ -114,7 +120,10 @@
         
   
           // Log the resulting object
-          console.log(response);
+          console.log(response.value);
+
+          displayUVData(response.value)
+          
 
            // fetchUV(response.coord)
 
@@ -123,9 +132,13 @@
     };
 
     function displayUVData( cityData){
+        console.log(cityData)
+        $(".uv").html( ' UV Score: ' + cityData);
+
+
 
     }
-        
+     displayUVData();   
     
 
     function fetchForecast(city){
