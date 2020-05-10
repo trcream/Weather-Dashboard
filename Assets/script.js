@@ -1,15 +1,61 @@
-
+$(document).ready(function(){
     
     var cacheKey = 'KnownCities'
     var cities = JSON.parse(localStorage.getItem(cacheKey));
     var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
      
+
+    var searchButton = $('#searchBtn')
+ 
+
+    searchButton.on('click',function(){
      
+      var searchCity = $('.input').val();
+      searchWeather(searchCity);
+      displayUVData();   
+
+
+      
+     // var cityInput= $('#cityInput').val();
+    //  console.log(cityInput)
+  
+     // console.log('alert')
+        
+    })
+
+        
      if (! cities) {
 
         cities = [];
+      
+       
+        
 
         console.log(cities)
+     }
+
+     else{
+    
+      renderHistory(cities);
+
+     }
+
+
+
+
+     function renderHistory(cities){
+
+      for (var i = 0; i < cities.length;i++ ){
+
+        newDiv = $('<div>')
+        newDiv.text(cities[i])
+        $('#History').append(newDiv)
+       // $('#History').append(cities[i]);
+        console.log(cities[i])
+   
+
+      }
+
      }
      console.log(cities)
      // starting point
@@ -67,10 +113,10 @@
 
        var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
-       $(".cityName").append(cityData.name); 
-       $(".date").append(currentDate);
-       $(".temp").append(cityData.main.temp);
-       $(".humidity").append(cityData.main.humidity);
+       $(".cityName").text('Weather for: ' + cityData.name ); 
+       $(".date").text('Date: '+ currentDate);
+       $(".temp").text('Temperature: ' + cityData.main.temp);
+       $(".humidity").text('Humidity: ' + cityData.main.humidity);
   
        console.log(cityData)
     
@@ -138,7 +184,7 @@
 
 
     }
-     displayUVData();   
+    
     
 
     function fetchForecast(city){
@@ -167,7 +213,7 @@
 
     }
 
-    searchWeather('Seattle')
+    
 
 
 
@@ -195,3 +241,5 @@
           console.log("Wind Speed: " + response.wind.speed);
           console.log("Humidity: " + response.main.humidity);
           console.log("Temperature (F): " + tempF); */
+
+        });
