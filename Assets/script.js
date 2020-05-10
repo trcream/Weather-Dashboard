@@ -12,14 +12,13 @@ $(document).ready(function(){
      
       var searchCity = $('.input').val();
       searchWeather(searchCity);
-      displayUVData();   
+      displayUVData();
+     
 
 
       
      // var cityInput= $('#cityInput').val();
-    //  console.log(cityInput)
   
-     // console.log('alert')
         
     })
 
@@ -31,7 +30,7 @@ $(document).ready(function(){
        
         
 
-        console.log(cities)
+        
      }
 
      else{
@@ -57,12 +56,13 @@ $(document).ready(function(){
       }
 
      }
-     console.log(cities)
+  
      // starting point
      function searchWeather ( city ){
 
         addNewCity(city);      
         fetchWeather(city);
+        fetchForecast(city);   
                   
       }
 
@@ -93,10 +93,10 @@ $(document).ready(function(){
         .then(function(response) {
   
           // Log the queryURL
-          console.log(queryURL);
+       
   
           // Log the resulting object
-        //  console.log(response.coord);
+     
 
             fetchUV(response.coord);
             displayWeather(response);
@@ -118,18 +118,18 @@ $(document).ready(function(){
        $(".temp").text('Temperature: ' + cityData.main.temp);
        $(".humidity").text('Humidity: ' + cityData.main.humidity);
   
-       console.log(cityData)
+    
     
      }
   
 
      function fetchUV(coords){
 
-        console.log(coords)
+      
         var lattitude = coords.lat;
-        console.log(lattitude);
+      
         var longitude = coords.lon;
-        console.log(longitude)
+  
 
 
 
@@ -145,13 +145,7 @@ $(document).ready(function(){
       // Here we are building the URL we need to query the database
 
       var queryURL = 'https://api.openweathermap.org/data/2.5/uvi?' + queryParams
-      console.log(queryURL)
-
- /*      var queryURLUV = 'http://api.openweathermap.org/data/2.5/uvi?appid='+ appid
-      +'&lat='+ lat 
-      +'&lon='+ lon
-        console.log(queryURL)
- */
+     
 
     
       // Here we run our AJAX call to the OpenWeatherMap API
@@ -164,9 +158,7 @@ $(document).ready(function(){
   
           // Log the queryURL
         
-  
-          // Log the resulting object
-          console.log(response.value);
+
 
           displayUVData(response.value)
           
@@ -178,20 +170,53 @@ $(document).ready(function(){
     };
 
     function displayUVData( cityData){
-        console.log(cityData)
+  
         $(".uv").html( ' UV Score: ' + cityData);
 
 
 
     }
     
-    
+   
 
     function fetchForecast(city){
 
+  
+      var queryParams =$.param({
+                q:city,
+        appid: "7bb104f282f38f6d6a105af6428f8f9f"
+      });
+
+  
+
+    // Here we are building the URL we need to query the database
+
+    var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?' + queryParams
+    console.log(queryURL)
+  
+    // Here we run our AJAX call to the OpenWeatherMap API
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      // We store all of the retrieved data inside of an object called "response"
+      .then(function(response) {
+
+        console.log(queryURL)
+      
+        displayForecast(response);
+
+      
+        
+
+      
+
+      });
     }
 
-    function displayForecast( cityData){
+    function displayForecast( response){
+      console.log('Trenton');
+      console.log(response)
 
     }
 
@@ -205,7 +230,7 @@ $(document).ready(function(){
             cities.push(city);
 
             console.log(cities);
-            console.log(cacheKey)
+            console.log(cacheKey);
 
             localStorage.setItem(cacheKey, JSON.stringify(cities))
 
@@ -214,32 +239,5 @@ $(document).ready(function(){
     }
 
     
-
-
-
-
- // Get my starting data, try to load from local storage
-
-// display the city's <datalist
-
-//if you put :  &units=imperial in the query url the units will be in imperial units and you won't have to run a kelvin to imperial calculation
-
-
-   /*        // Transfer content to HTML
-          $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-          $(".wind").text("Wind Speed: " + response.wind.speed);
-          $(".humidity").text("Humidity: " + response.main.humidity);
-          
-          // Convert the temp to fahrenheit
-          var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-  
-          // add temp content to html
-          $(".temp").text("Temperature (K) " + response.main.temp);
-          $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
-  
-          // Log the data in the console as well
-          console.log("Wind Speed: " + response.wind.speed);
-          console.log("Humidity: " + response.main.humidity);
-          console.log("Temperature (F): " + tempF); */
 
         });
