@@ -113,9 +113,11 @@ $(document).ready(function(){
 
        var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
+       varTemp0 = Math.round((cityData.main.temp -273.15) * 1.8 +32);
+
        $(".cityName").text('Weather for: ' + cityData.name ); 
        $(".date").text('Date: '+ currentDate);
-       $(".temp").text('Temperature: ' + cityData.main.temp);
+       $(".temp").text('Temperature: ' + varTemp0);
        $(".humidity").text('Humidity: ' + cityData.main.humidity);
   
     
@@ -198,6 +200,7 @@ $(document).ready(function(){
     $.ajax({
       url: queryURL,
       method: "GET"
+
     })
       // We store all of the retrieved data inside of an object called "response"
       .then(function(response) {
@@ -217,6 +220,51 @@ $(document).ready(function(){
     function displayForecast( response){
       console.log('Trenton');
       console.log(response)
+      console.log(response.list[0].main.temp);
+      console.log(response.list[0].main.humidity)
+
+      varTempF1 = Math.round((response.list[0].main.temp -273.15) * 1.8 +32);
+      var newDate1 = moment().add(1,'days').format("MMMM Do");
+
+      $("#date-1").text('Date: '+ newDate1);
+      $("#icon-1").text();
+      $("#temp-1").text('Temp: ' + varTempF1);
+      $("#humidity-1").text('Humidity: ' + response.list[0].main.humidity);
+
+      varTempF2 = Math.round((response.list[1].main.temp -273.15) * 1.8 +32);
+      var newDate2 = moment().add(2,'days').format("MMMM Do");
+
+      $("#date-2").text('Date: '+ newDate2);
+      $("#icon-2").text();
+      $("#temp-2").text('Temp: ' + varTempF2);
+      $("#humidity-2").text('Humidity: ' + response.list[1].main.humidity);
+
+      varTempF3 = Math.round((response.list[2].main.temp -273.15) * 1.8 +32);
+      var newDate3 = moment().add(3,'days').format("MMMM Do");
+
+      $("#date-3").text('Date: '+ newDate3);
+      $("#icon-3").text();
+      $("#temp-3").text('Temp: ' + varTempF3);
+      $("#humidity-3").text('Humidity: ' + response.list[2].main.humidity);
+
+      varTempF4 = Math.round((response.list[3].main.temp -273.15) * 1.8 +32);
+      var newDate4 = moment().add(4,'days').format("MMMM Do");
+
+      $("#date-4").text('Date: '+ newDate4);
+      $("#icon-4").text();
+      $("#temp-4").text('Temp: ' + varTempF4);
+      $("#humidity-4").text('Humidity: ' + response.list[3].main.humidity);
+
+      varTempF5 = Math.round((response.list[4].main.temp -273.15) * 1.8 +32);
+      var newDate5 = moment().add(5,'days').format("MMMM Do");
+
+      $("#date-5").text('Date: '+ newDate4);
+      $("#icon-5").text();
+      $("#temp-5").text('Temp: ' + varTempF4);
+      $("#humidity-5").text('Humidity: ' + response.list[4].main.humidity);
+      
+
+
 
     }
 
