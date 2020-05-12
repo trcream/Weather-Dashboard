@@ -117,6 +117,10 @@ $(document).ready(function(){
 
        varTemp0 = Math.round((cityData.main.temp -273.15) * 1.8 +32);
 
+       var iconcode = cityData.weather[0].icon;
+       var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+       $('#wicon').attr('src', iconurl);
+
        $(".cityName").text('Weather for: ' + cityData.name ); 
        $(".date").text('Date: '+ currentDate);
        $(".temp").text('Temperature: ' + varTemp0);
@@ -235,45 +239,63 @@ $(document).ready(function(){
     }
 
     function displayForecast( response){
-      console.log('Trenton');
-      console.log(response)
-      console.log(response.list[0].main.temp);
-      console.log(response.list[0].main.humidity)
-
+  
+        //
       varTempF1 = Math.round((response.list[0].main.temp -273.15) * 1.8 +32);
       var newDate1 = moment().add(1,'days').format("MMMM Do");
+
+      var iconcode1 = response.list[0].weather[0].icon;
+       var iconurl1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
+       $('#wicon1').attr('src', iconurl1);
 
       $("#date-1").text('Date: '+ newDate1);
       $("#icon-1").text();
       $("#temp-1").text('Temp: ' + varTempF1);
       $("#humidity-1").text('Humidity: ' + response.list[0].main.humidity);
-
+      //
       varTempF2 = Math.round((response.list[1].main.temp -273.15) * 1.8 +32);
       var newDate2 = moment().add(2,'days').format("MMMM Do");
+
+      var iconcode2 = response.list[1].weather[0].icon;
+      var iconurl2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png";
+      $('#wicon2').attr('src', iconurl2);
+
 
       $("#date-2").text('Date: '+ newDate2);
       $("#icon-2").text();
       $("#temp-2").text('Temp: ' + varTempF2);
       $("#humidity-2").text('Humidity: ' + response.list[1].main.humidity);
-
+      //
       varTempF3 = Math.round((response.list[2].main.temp -273.15) * 1.8 +32);
       var newDate3 = moment().add(3,'days').format("MMMM Do");
+
+      var iconcode3 = response.list[2].weather[0].icon;
+      var iconurl3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png";
+      $('#wicon3').attr('src', iconurl3);
 
       $("#date-3").text('Date: '+ newDate3);
       $("#icon-3").text();
       $("#temp-3").text('Temp: ' + varTempF3);
       $("#humidity-3").text('Humidity: ' + response.list[2].main.humidity);
-
+      //
       varTempF4 = Math.round((response.list[3].main.temp -273.15) * 1.8 +32);
       var newDate4 = moment().add(4,'days').format("MMMM Do");
+
+      var iconcode4 = response.list[3].weather[0].icon;
+      var iconurl4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png";
+      $('#wicon4').attr('src', iconurl4);
 
       $("#date-4").text('Date: '+ newDate4);
       $("#icon-4").text();
       $("#temp-4").text('Temp: ' + varTempF4);
       $("#humidity-4").text('Humidity: ' + response.list[3].main.humidity);
-
+      //
       varTempF5 = Math.round((response.list[4].main.temp -273.15) * 1.8 +32);
       var newDate5 = moment().add(5,'days').format("MMMM Do");
+
+      var iconcode5 = response.list[4].weather[0].icon;
+      var iconurl5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png";
+      $('#wicon5').attr('src', iconurl5);
 
       $("#date-5").text('Date: '+ newDate4);
       $("#icon-5").text();
