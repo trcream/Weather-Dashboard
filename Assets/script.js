@@ -111,6 +111,8 @@ $(document).ready(function(){
 
        // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
 
+       console.log(cityData)
+
        var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
        varTemp0 = Math.round((cityData.main.temp -273.15) * 1.8 +32);
@@ -118,6 +120,7 @@ $(document).ready(function(){
        $(".cityName").text('Weather for: ' + cityData.name ); 
        $(".date").text('Date: '+ currentDate);
        $(".temp").text('Temperature: ' + varTemp0);
+       $(".wind").text('Wind Speed: ' + cityData.wind.speed);
        $(".humidity").text('Humidity: ' + cityData.main.humidity);
   
     
@@ -174,6 +177,20 @@ $(document).ready(function(){
     function displayUVData( cityData){
   
         $(".uv").html( ' UV Score: ' + cityData);
+
+        if( cityData > 8){
+
+          $('.uv').css("background-color","red");
+        }
+
+        else if(cityData < 8 || cityData >  3 )
+
+        $('.uv').css("background-color","yellow");
+
+        else{
+
+          $('.uv').css("background-color","green");
+        }
 
 
 
